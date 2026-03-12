@@ -130,9 +130,11 @@ body{font-family:'Poppins',sans-serif;}
                 {{ $headline->judul }}
             </h2>
 
-            <div class="text-gray-700 leading-relaxed space-y-4">
-                {!! $headline->isi !!}
-            </div>
+            <div class="text-gray-700 leading-relaxed space-y-4 
+            [&_ol]:list-decimal [&_ol]:ml-6
+            [&_ul]:list-disc [&_ul]:ml-6">
+    {!! $headline->isi !!}
+</div>
 
             <div class="mt-8 flex justify-end">
     <button 

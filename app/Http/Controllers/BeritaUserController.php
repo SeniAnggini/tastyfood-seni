@@ -12,8 +12,7 @@ class BeritaUserController extends Controller
 
         $berita = Berita::latest()
             ->where('id', '!=', optional($headline)->id)
-            ->paginate(8); // ← SESUAI FOTO (4 x 2)
-
+            ->paginate(8); 
         return view('frontend.berita', compact('headline', 'berita'));
     }
 
