@@ -1,41 +1,72 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-xl font-bold">➕ Tambah Berita</h2>
-    </x-slot>
+@extends('admin.layouts.app')
 
-    <div class="py-6 max-w-xl mx-auto bg-white p-6 rounded shadow">
-        <form action="{{ route('admin.berita.store') }}"
-              method="POST"
-              enctype="multipart/form-data">
-            @csrf
+@section('title', 'Tambah Berita')
 
-            <div class="mb-3">
-                <input name="judul"
-                       placeholder="Judul"
-                       class="w-full border p-2 rounded"
-                       required>
-            </div>
+@section('content')
+<div class="max-w-xl mx-auto bg-white p-4 sm:p-6 rounded-lg shadow-md">
 
-            <div class="mb-3">
-                <textarea name="isi"
-                          placeholder="Isi berita"
-                          class="w-full border p-2 rounded"
-                          rows="5"
-                          required></textarea>
-            </div>
+    <h2 class="text-lg sm:text-xl font-semibold mb-4">
+        Tambah Berita
+    </h2>
 
-            <div class="mb-3">
-                <input type="file"
-                       name="gambar"
-                       class="w-full border p-2 rounded">
-            </div>
+    <form action="{{ route('admin.berita.store') }}"
+          method="POST"
+          enctype="multipart/form-data">
+        @csrf
 
-            <div class="flex justify-end">
-                <button type="submit"
-                        class="px-4 py-2 bg-blue-600 text-white rounded">
-                    💾 Simpan
-                </button>
-            </div>
-        </form>
-    </div>
-</x-app-layout>
+        <!-- JUDUL -->
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">
+                Judul
+            </label>
+
+            <input type="text"
+                   name="judul"
+                   class="w-full border p-2 rounded text-sm"
+                   placeholder="Masukkan judul berita"
+                   required>
+        </div>
+
+        <!-- ISI -->
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">
+                Isi Berita
+            </label>
+
+            <textarea name="isi"
+                      rows="5"
+                      class="w-full border p-2 rounded text-sm"
+                      placeholder="Masukkan isi berita"
+                      required></textarea>
+        </div>
+
+        <!-- GAMBAR -->
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">
+                Gambar
+            </label>
+
+            <input type="file"
+                   name="gambar"
+                   class="w-full border p-2 rounded text-sm">
+        </div>
+
+        <!-- BUTTON -->
+        <div class="flex justify-between items-center mt-6">
+
+            <a href="{{ route('admin.berita.index') }}"
+               class="text-sm bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">
+                ⬅ Kembali
+            </a>
+
+            <button type="submit"
+                    class="text-sm bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                💾 Simpan
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+@endsection

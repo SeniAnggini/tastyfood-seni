@@ -3,53 +3,61 @@
 @section('title', 'Pesan Kontak')
 
 @section('content')
-<div class="p-6">
-    <h1 class="text-2xl font-bold mb-4">Pesan Masuk</h1>
+<div>
+
+    <h1 class="text-xl sm:text-2xl font-bold mb-4">Pesan Masuk</h1>
 
     @if(session('success'))
-        <div class="bg-green-100 text-green-700 p-3 mb-4 rounded">
+        <div class="bg-green-100 text-green-700 p-3 mb-4 rounded text-sm">
             {{ session('success') }}
         </div>
     @endif
 
-    <div class="overflow-x-auto">
-        <table class="w-full bg-white rounded shadow">
-            <thead class="bg-gray-200">
-                <tr>
-                    <th class="p-2 border">Nama</th>
-                    <th class="p-2 border">Email</th>
-                    <th class="p-2 border">Pesan</th>
-                    <th class="p-2 border w-32">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse($contacts as $item)
-                    <tr>
-                        <td class="p-2 border">{{ $item->nama }}</td>
-                        <td class="p-2 border">{{ $item->email }}</td>
-                        <td class="p-2 border">{{ $item->pesan }}</td>
-                        <td class="p-2 border text-center">
-                            <form method="POST" action="{{ route('admin.kontak.destroy', $item->id) }}">
-                                @csrf
-                                @method('DELETE')
-                                <button
-                                    onclick="return confirm('Hapus pesan ini?')"
-                                    class="text-red-600 hover:underline"
-                                >
-                                    Hapus
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="4" class="text-center p-4 text-gray-500">
-                            Belum ada pesan masuk
-                        </td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+
+        @forelse($contacts as $item)
+        <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300 p-4 flex flex-col">
+
+            <!-- HEADER -->
+            <div class="mb-2">
+                <h4 class="font-semibold text-base sm:text-lg">
+                    {{ $item->nama }}
+                </h4>
+                <p class="text-xs sm:text-sm text-gray-500">
+                    {{ $item->email }}
+                </p>
+            </div>
+
+            <!-- PESAN -->
+            <div class="text-sm text-gray-700">
+                {{ \Illuminate\Support\Str::limit($item->pesan, 120) }}
+            </div>
+
+            <!-- AKSI -->
+            <div class="mt-auto pt-4">
+                <form method="POST" action="{{ route('admin.kontak.destroy', $item->id) }}">
+                    @csrf
+                    @method('DELETE')
+
+                    <button
+                        type="submit"
+                        onclick="return confirm('Hapus pesan ini?')"
+                        class="w-full bg-red-500 hover:bg-red-600 text-white text-xs sm:text-sm px-3 py-2 rounded"
+                    >
+                        🗑️ Hapus
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        @empty
+        <div class="col-span-full text-center text-gray-500 py-10">
+            Belum ada pesan masuk
+        </div>
+        @endforelse
+
     </div>
+
 </div>
 @endsection

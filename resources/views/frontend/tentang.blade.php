@@ -140,6 +140,17 @@
             </p>
         </div>
 
+        <div>
+
+    @if($misiImages->count() == 1)
+
+        {{-- ✅ Kalau cuma 1 gambar --}}
+        <img src="{{ asset('storage/'.$misiImages->first()->gambar) }}"
+             class="w-full h-72 object-cover rounded-xl shadow">
+
+    @elseif($misiImages->count() > 1)
+
+        {{-- ✅ Kalau lebih dari 1 --}}
         <div class="grid grid-cols-2 gap-5">
             @foreach($misiImages as $img)
                 <img src="{{ asset('storage/'.$img->gambar) }}"
@@ -147,6 +158,14 @@
             @endforeach
         </div>
 
+    @else
+
+        {{-- ❗ Kalau tidak ada gambar --}}
+        <p class="text-gray-400 text-sm">Belum ada gambar</p>
+
+    @endif
+
+</div>
     </div>
 </section>
 @include('frontend.layouts.footer')

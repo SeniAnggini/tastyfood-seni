@@ -133,5 +133,6 @@
     @endforeach
 </div>
 
-
-@endsection
+<div class="mt-8 flex justify-center">
+    {{ $galleries->links('pagination::simple-tailwind') }}
+</div>@endsection

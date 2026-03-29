@@ -1,106 +1,82 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Gallery</title>
+@extends('admin.layouts.app')
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #eef2f7;
-            padding: 30px;
-        }
+@section('title', 'Edit Gallery')
 
-        .card {
-            background: #ffffff;
-            max-width: 420px;
-            margin: auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.1);
-        }
+@section('content')
+<div class="max-w-xl mx-auto bg-white p-4 sm:p-6 rounded-lg shadow-md">
 
-        h2 {
-            text-align: center;
-            margin-bottom: 15px;
-        }
+    <h2 class="text-lg sm:text-xl font-semibold mb-4">
+        ✏️ Edit Gallery
+    </h2>
 
-        label {
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            margin-bottom: 12px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        img {
-            border-radius: 6px;
-            margin-bottom: 10px;
-        }
-
-        .btn {
-            width: 100%;
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .btn:hover {
-            background: #1d4ed8;
-        }
-
-        .back {
-            display: block;
-            text-align: center;
-            margin-top: 10px;
-            font-size: 13px;
-            text-decoration: none;
-            color: #2563eb;
-        }
-    </style>
-</head>
-<body>
-
-<div class="card">
-    <h2>✏️ Edit Gallery</h2>
-
-    <form action="{{ route('admin.gallery.update', $gallery->id) }}" 
-          method="POST" 
+    <form action="{{ route('admin.gallery.update', $gallery->id) }}"
+          method="POST"
           enctype="multipart/form-data">
-
         @csrf
         @method('PUT')
 
-        <label>Judul</label>
-        <input type="text" name="judul" value="{{ $gallery->judul }}" required>
+        <!-- JUDUL -->
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">
+                Judul
+            </label>
 
-         <label>Gambar Sekarang</label><br>
-        <img src="{{ asset('storage/'.$gallery->gambar) }}" width="100">
+            <input type="text"
+                   name="judul"
+                   value="{{ $gallery->judul }}"
+                   class="w-full border p-2 rounded text-sm"
+                   required>
+        </div>
 
-        <label>Ganti Gambar (Opsional)</label>
-        <input type="file" name="gambar">
+        <!-- GAMBAR SEKARANG -->
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">
+                Gambar Saat Ini
+            </label>
 
-        <label>Deskripsi</label>
-        <textarea name="description" required>{{ $gallery->description }}</textarea>
+            <img src="{{ asset('storage/'.$gallery->gambar) }}"
+                 class="w-32 h-32 object-cover rounded border">
+        </div>
 
-       
+        <!-- GANTI GAMBAR -->
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">
+                Ganti Gambar (Opsional)
+            </label>
 
-        <button type="submit" class="btn">💾 Update</button>
+            <input type="file"
+                   name="gambar"
+                   class="w-full border p-2 rounded text-sm">
+        </div>
+
+        <!-- DESKRIPSI -->
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">
+                Deskripsi
+            </label>
+
+            <textarea name="description"
+                      rows="4"
+                      class="w-full border p-2 rounded text-sm"
+                      required>{{ $gallery->description }}</textarea>
+        </div>
+
+        <!-- BUTTON -->
+        <div class="flex justify-between items-center mt-6">
+
+            <a href="{{ route('admin.gallery.index') }}"
+               class="text-sm bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">
+                ⬅ Kembali
+            </a>
+
+            <button type="submit"
+                    class="text-sm bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                💾 Update
+            </button>
+
+        </div>
+
     </form>
 
-   <a href="{{ route('admin.gallery.index') }}" class="back">
-    ← Kembali ke Gallery
-</a>
 </div>
-
-</body>
-</html>
+@endsection

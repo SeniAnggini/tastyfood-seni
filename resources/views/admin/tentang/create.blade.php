@@ -1,117 +1,74 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Tambah Tentang</title>
+@extends('admin.layouts.app')
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            margin: 0;
-            padding: 0;
-        }
+@section('title', 'Tambah Tentang')
 
-        .container {
-            width: 500px;
-            margin: 60px auto;
-            background: #ffffff;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+@section('content')
+<div class="max-w-xl mx-auto bg-white p-4 sm:p-6 rounded-lg shadow-md">
 
-        h1 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #333;
-        }
-
-        label {
-            font-weight: bold;
-            color: #444;
-        }
-
-        textarea,
-        input[type="file"],
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 6px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        textarea {
-            resize: vertical;
-        }
-
-        .btn-group {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        button {
-            background: #0d6efd;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        button:hover {
-            background: #0b5ed7;
-        }
-
-        .btn-back {
-            text-decoration: none;
-            background: #6c757d;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .btn-back:hover {
-            background: #5c636a;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h1>Tambah Data Tentang</h1>
+    <h2 class="text-lg sm:text-xl font-semibold mb-4">
+        Tambah Data Tentang
+    </h2>
 
     <form action="{{ route('admin.tentang.store') }}"
           method="POST"
           enctype="multipart/form-data">
-
         @csrf
 
-        <label>Section</label>
-        <select name="section" required>
-            <option value="">-- Pilih Section --</option>
-            <option value="tasty_food">Tasty Food</option>
-            <option value="visi">Visi</option>
-            <option value="misi">Misi</option>
-        </select>
+        <!-- SECTION -->
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">
+                Section
+            </label>
 
-        <label>Deskripsi</label>
-        <textarea name="deskripsi" rows="5" required></textarea>
-
-        <label>Foto</label>
-        <input type="file" name="gambar">
-
-        <div class="btn-group">
-            <button type="submit">💾 Simpan</button>
-            <a href="{{ route('admin.tentang.index') }}" class="btn-back">⬅ Kembali</a>
+            <select name="section"
+                    class="w-full border p-2 rounded text-sm"
+                    required>
+                <option value="">-- Pilih Section --</option>
+                <option value="tasty_food">Tasty Food</option>
+                <option value="visi">Visi</option>
+                <option value="misi">Misi</option>
+            </select>
         </div>
-    </form>
-</div>
 
-</body>
-</html>
+        <!-- DESKRIPSI -->
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">
+                Deskripsi
+            </label>
+
+            <textarea name="deskripsi"
+                      rows="5"
+                      class="w-full border p-2 rounded text-sm"
+                      required></textarea>
+        </div>
+
+        <!-- GAMBAR -->
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">
+                Gambar
+            </label>
+
+            <input type="file"
+                   name="gambar"
+                   class="w-full border p-2 rounded text-sm">
+        </div>
+
+        <!-- BUTTON -->
+        <div class="flex justify-between items-center mt-6">
+
+            <a href="{{ route('admin.tentang.index') }}"
+               class="text-sm bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">
+                ⬅ Kembali
+            </a>
+
+            <button type="submit"
+                    class="text-sm bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                💾 Simpan
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+@endsection

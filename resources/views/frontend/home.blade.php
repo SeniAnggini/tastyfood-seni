@@ -29,22 +29,17 @@ Tasty Food adalah tempat di mana kualitas dan cita rasa bertemu dalam satu sajia
 
         {{-- IMAGE --}}
 
-<div class="absolute right-0 
-            top-[-140px] sm:top-[20px] md:top-[-80px] lg:top-[-180px]
-            w-[480px] sm:w-[400px] lg:w-[800px]
-            translate-x-1/4 lg:translate-x-0
-            lg:right-[-150px]
-            flex justify-center
-            transform-gpu transition-all duration-700 ease-in-out
+<div class="absolute top-0 right-0
+            w-[95vw] sm:w-[75vw] md:w-[65vw] lg:w-[60vw] xl:w-[55vw]
+            max-w-[1200px]
+            translate-x-1/3 -translate-y-1/4
+            pointer-events-none
             z-10">
 
     <img
         src="{{ asset('storage/tentang/img-4-2000x2000.png') }}"
-        class="w-full 
-               max-h-none lg:max-h-[95vh]
-               object-contain">
-</div>
-</section>
+        class="w-full h-auto object-contain">
+</div></section>
 
 {{-- ================= TENTANG ================= --}}
 <section class="relative mt-[-200px] py-24 bg-white text-center">

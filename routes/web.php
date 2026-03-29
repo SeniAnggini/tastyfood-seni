@@ -26,7 +26,7 @@ return view('frontend.tentang', compact('tentangs'));
 })->name('tentang');
 
 Route::get('/gallery', function () {
-    $galleries = Gallery::latest()->get();
+    $galleries = Gallery::latest()->paginate();
     return view('frontend.gallery', compact('galleries'));
 })->name('gallery');
 

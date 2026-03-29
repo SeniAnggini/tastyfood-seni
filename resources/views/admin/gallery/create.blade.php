@@ -1,90 +1,17 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Tambah Gallery</title>
+@extends('admin.layouts.app')
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #eef2f7;
-            padding: 30px;
-        }
+@section('title', 'Tambah Gallery')
 
-        .card {
-            background: #ffffff;
-            max-width: 420px;
-            margin: auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.1);
-        }
+@section('content')
+<div class="max-w-xl mx-auto bg-white p-4 sm:p-6 rounded-lg shadow-md">
 
-        h2 {
-            text-align: center;
-            margin-bottom: 15px;
-        }
+    <h2 class="text-lg sm:text-xl font-semibold mb-4">
+        Tambah Gallery
+    </h2>
 
-        label {
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            margin-bottom: 12px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 90px;
-        }
-
-        .btn {
-            width: 100%;
-            background: #16a34a;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .btn:hover {
-            background: #15803d;
-        }
-
-        .back {
-            display: block;
-            text-align: center;
-            margin-top: 12px;
-            font-size: 13px;
-            text-decoration: none;
-            color: #2563eb;
-        }
-
-        .error {
-            background: #fee2e2;
-            color: #991b1b;
-            padding: 8px;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            font-size: 13px;
-        }
-    </style>
-</head>
-<body>
-
-<div class="card">
-
-    {{-- TAMPILKAN ERROR --}}
+    {{-- ERROR --}}
     @if ($errors->any())
-        <div class="error">
+        <div class="bg-red-100 text-red-700 p-3 mb-4 rounded text-sm">
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>• {{ $error }}</li>
@@ -93,30 +20,64 @@
         </div>
     @endif
 
-    <form 
-    action="{{ route('admin.gallery.store') }}" 
-    method="POST" 
-    enctype="multipart/form-data"
->
-    @csrf
+    <form action="{{ route('admin.gallery.store') }}"
+          method="POST"
+          enctype="multipart/form-data">
+        @csrf
 
-    <label>Judul</label>
-    <input type="text" name="judul" value="{{ old('judul') }}" required>
+        <!-- JUDUL -->
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">
+                Judul
+            </label>
 
-    <label>Gambar</label>
-    <input type="file" name="gambar" required>
+            <input type="text"
+                   name="judul"
+                   value="{{ old('judul') }}"
+                   class="w-full border p-2 rounded text-sm"
+                   required>
+        </div>
 
-    <label>Deskripsi</label>
-    <textarea name="description" required>{{ old('description') }}</textarea>
+        <!-- GAMBAR -->
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">
+                Gambar
+            </label>
 
-    <button type="submit" class="btn">💾 Simpan</button>
-</form>
+            <input type="file"
+                   name="gambar"
+                   class="w-full border p-2 rounded text-sm"
+                   required>
+        </div>
 
-<a href="{{ route('admin.gallery.index') }}" class="back">
-    ← Kembali ke Gallery
-</a>
+        <!-- DESKRIPSI -->
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-1">
+                Deskripsi
+            </label>
+
+            <textarea name="description"
+                      rows="4"
+                      class="w-full border p-2 rounded text-sm"
+                      required>{{ old('description') }}</textarea>
+        </div>
+
+        <!-- BUTTON -->
+        <div class="flex justify-between items-center mt-6">
+
+            <a href="{{ route('admin.gallery.index') }}"
+               class="text-sm bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">
+                ⬅ Kembali
+            </a>
+
+            <button type="submit"
+                    class="text-sm bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+                💾 Simpan
+            </button>
+
+        </div>
+
+    </form>
 
 </div>
-
-</body>
-</html>
+@endsection
