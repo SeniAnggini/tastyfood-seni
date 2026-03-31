@@ -30,7 +30,7 @@ Tasty Food adalah tempat di mana kualitas dan cita rasa bertemu dalam satu sajia
         {{-- IMAGE --}}
 
 <div class="absolute top-0 right-0
-            w-[95vw] sm:w-[75vw] md:w-[65vw] lg:w-[60vw] xl:w-[55vw]
+           w-[80vw] sm:w-[65vw] md:w-[55vw] lg:w-[50vw] xl:w-[45vw]
             max-w-[1200px]
             translate-x-1/3 -translate-y-1/4
             pointer-events-none
